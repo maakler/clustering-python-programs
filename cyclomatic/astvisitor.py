@@ -2,6 +2,8 @@ import ast
 
 # ast visitor template
 # https://gist.github.com/jtpio/cb30bca7abeceae0234c9ef43eec28b4
+# useful stuff to vectorize
+# https://github.com/scriptographers/UnPlag
 
 class Visitor(ast.NodeVisitor):
     
