@@ -10,7 +10,7 @@
 
 
 
-Oliver testing vim 
+testing vim 
 
 
 hjkl - navigation
