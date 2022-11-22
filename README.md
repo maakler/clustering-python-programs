@@ -1,4 +1,4 @@
-enter location to .py file in main.py and tokens are returned
+enter path to .py file --> run main.py --> tokens are returned
 
 tokens can be turned into vectors
 
