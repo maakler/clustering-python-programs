@@ -1,21 +1,66 @@
 import os
-from cyclomatic.astvisitor import *
-from cyclomatic.vars import *
+import ast
 
+import numpy as np
+import seaborn as sns
 
-BASE_PATH = 'C:\\Users\\'
-FILE = 'kodu3.py'
+import visitors.cyclomatic as cyclomatic
+import visitors.allNodes as allnodes
+import visitors.vars as v
+from sklearn.metrics.pairwise import linear_kernel
+from sklearn.feature_extraction.text import TfidfVectorizer
 
-filepath = os.path.join(BASE_PATH, FILE)
-files = []
+filepath = os.path.join(os.path.dirname(__file__), "input.py")
+with open(filepath, 'r') as f:
+    pyfile = f.read()
 
-root = ast.parse(SOURCE)
-visitor = Visitor()
-visitor.visit(root)
-varnames = getVarNames(filepath)
+root = ast.parse(pyfile)
 
-print('different function types used:')
-print(visitor.tokens)
-print(sorted(visitor.tokens))
-print('names of functions variable etc')
+cycvisitor = cyclomatic.Visitor()
+cycvisitor.visit(root)
+
+allvisitor = allnodes.Visitor()
+allvisitor.visit(root)
+
+varnames = v.getVarNames(filepath)
+
+print('expressions and statements:')
+print(cycvisitor.tokens)
+print(allvisitor.tokens)
+print('expressions and statements sorted:')
+print(sorted(cycvisitor.tokens))
+print(sorted(allvisitor.tokens))
+print('names of functions variable etc:')
 print(varnames)
+
+
+def identityFunction(file):
+    return file
+
+
+vectorizer = TfidfVectorizer(
+    analyzer="word",
+    tokenizer=identityFunction,
+    preprocessor=identityFunction,
+    # Consider unigrams, bigrams and trigrams, including trigrams works better for python files
+    ngram_range=(1, 3),
+    sublinear_tf=True,  # (1+log(tf)) instead of just tf
+    max_features=5000,
+    encoding="utf-8",
+    decode_error="ignore",
+    stop_words=None,
+    lowercase=False,
+    norm="l2"  # Each row will be unit normalized
+)
+
+S = vectorizer.fit_transform([cycvisitor.tokens])  # Vocabulary built is inside vectorizer.vocabulary_
+print(vectorizer.vocabulary_)
+
+tfm = linear_kernel(S, S)
+
+# TF-IDF Heatmap
+thm = sns.heatmap(tfm)
+fig = thm.get_figure()
+fig.savefig("results/tfidf_heatmap.png", dpi=150)
+
+np.savetxt("results/tfidf", tfm, fmt="%.4f", delimiter=',')

@@ -530,5 +530,5 @@ if __name__ == "__main__":
     root = ast.parse(SOURCE)
     visitor = Visitor()
     visitor.visit(root)
-    print(tokens)
-    print(sorted(tokens))
+    print(visitor.tokens)
+    print(sorted(visitor.tokens))
