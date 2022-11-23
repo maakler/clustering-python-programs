@@ -6,6 +6,7 @@ import seaborn as sns
 
 import visitors.cyclomatic as cyclomatic
 import visitors.allNodes as allnodes
+import visitors.unplag as unplag
 import visitors.vars as v
 from sklearn.metrics.pairwise import linear_kernel
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -16,9 +17,16 @@ with open(filepath, 'r') as f:
 
 root = ast.parse(pyfile)
 
+# visitor for cyclomatic complexity
 cycvisitor = cyclomatic.Visitor()
 cycvisitor.visit(root)
 
+# visitor with UnPlag metrics https://github.com/scriptographers/UnPlag
+# not working correctly
+unpvisitor = unplag.Visitor()
+unpvisitor.visit(root)
+
+# collects all nodes from ast tree (a bit unbalanced)
 allvisitor = allnodes.Visitor()
 allvisitor.visit(root)
 
@@ -27,9 +35,11 @@ varnames = v.getVarNames(filepath)
 print('expressions and statements:')
 print(cycvisitor.tokens)
 print(allvisitor.tokens)
+print(unpvisitor.tokens)
 print('expressions and statements sorted:')
 print(sorted(cycvisitor.tokens))
 print(sorted(allvisitor.tokens))
+print(sorted(unpvisitor.tokens))
 print('names of functions variable etc:')
 print(varnames)
 
@@ -53,7 +63,10 @@ vectorizer = TfidfVectorizer(
     norm="l2"  # Each row will be unit normalized
 )
 
-S = vectorizer.fit_transform([cycvisitor.tokens])  # Vocabulary built is inside vectorizer.vocabulary_
+
+files = [cycvisitor.tokens]
+
+S = vectorizer.fit_transform(files)  # Vocabulary built is inside vectorizer.vocabulary_
 print(vectorizer.vocabulary_)
 
 tfm = linear_kernel(S, S)
