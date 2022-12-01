@@ -1,0 +1,50 @@
+#a = float(input("Sisesta oma arv: "))
+#print(abs(a))
+
+#kuu_arv = int(input("Sisesta kuu arv: "))
+#if kuu_arv == 12 or kuu_arv == 1 or kuu_arv == 2:
+#    print("Talv")
+#elif kuu_arv >= 3 and kuu_arv < 6:
+#    print("Kevad")
+#elif kuu_arv >= 6 and kuu_arv < 9:
+#    print("Suvi")
+#elif kuu_arv >= 9 and kuu_arv < 12:
+#    print("Sügis")
+#else:
+#    print("Sisesta arv 1-12")
+
+from turtle import *
+
+bgcolor("turquoise")
+color("brown")
+width(5)
+fillcolor("blue")
+begin_fill()
+fd(200)
+rt(130)
+fd(50)
+rt(50)
+fd(300)
+rt(50)
+fd(50)
+rt(130)
+fd(200)
+end_fill()
+width(1)
+lt(90)
+fd(300)
+fillcolor("white")
+begin_fill()
+rt(120)
+fd(100)
+rt(120)
+fd(100)
+end_fill()
+fillcolor("white")
+begin_fill()
+fd(200)
+lt(120)
+fd(200)
+lt(120)
+end_fill()
+exitonclick()

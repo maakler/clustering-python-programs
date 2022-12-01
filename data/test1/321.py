@@ -1,0 +1,53 @@
+from turtle import *
+
+# laeva põhi
+
+pensize(2)
+color("brown", "brown")
+begin_fill()
+forward(180)
+left(60)
+forward(50)
+left(120)
+forward(230)
+left(120)
+forward(50)
+left(60)
+forward(180)
+left(60)
+forward(50)
+down()
+left(120)
+forward(115)
+end_fill()
+pensize(5)
+color("black", "black")
+right(90)
+forward(200)
+
+# lipp 
+
+color("red", "red")
+begin_fill()
+right(60)
+forward(30)
+left(120)
+forward(30)
+left(120)
+forward(30)
+end_fill()
+pensize(2)
+color("black", "red")
+
+# puri
+forward(10)
+right(30)
+forward(170)
+left(120)
+forward(85)
+right(90)
+forward(15)
+left(90)
+forward(150)
+left(133)
+forward(220)

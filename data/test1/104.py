@@ -1,0 +1,20 @@
+from turtle import *
+from math import *
+
+forward(225)
+right(90)
+forward(100)
+right(90)
+forward(400)
+right(60)
+forward(58/0.5)
+right(120)
+forward(100)
+left(60)
+forward(100)
+right(60)
+forward(293)
+right(80)
+forward(88)
+right(100)
+forward(400)

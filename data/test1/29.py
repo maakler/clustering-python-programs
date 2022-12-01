@@ -1,0 +1,33 @@
+from turtle import *
+
+forward(100)
+left(60)
+forward(80)
+left(120)
+forward(180)
+left(120)
+forward(80)
+left(60)
+up()
+left(120)
+forward(80)
+right(120)
+forward(90)
+left(90)
+down()
+forward(120)
+right(90)
+
+for x in range(180) :
+    forward(1)
+    right(1)
+
+right(90)
+up()
+forward(115)
+down()
+forward(40)
+left(150)
+forward(140)
+left(90)
+forward(80.82903769)

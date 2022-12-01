@@ -1,0 +1,32 @@
+from turtle import *
+
+forward(300)
+right(120)
+forward(150)
+right(60)
+forward(300)
+right(60)
+forward(150)
+right(120)
+forward(300)
+up()
+forward(50)
+down()
+left(90)
+forward(100)
+left(90)
+forward(50)
+right(90)
+forward(100)
+left(90)
+forward(50)
+left(90)
+forward(100)
+right(90)
+forward(50)
+left(90)
+forward(100)
+
+#ma ei teadnud et logide salvestamise peab ise sisse lülitama, seetõttu pole tegemise jooksul logisid tekkinud.
+
+exitonclick()

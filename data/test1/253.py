@@ -1,0 +1,28 @@
+from turtle import *
+
+right(45)
+forward(90)
+left(45)
+forward(300)
+left(45)
+forward(90)
+left(135)
+from math import sin, pi
+forward(300+2*sin(pi/4)*90)
+up()
+right(180)
+forward((300+2*sin(pi/4)*90)/2)
+down()
+left(90)
+forward(300)
+right(90)
+forward(10)
+right(90)
+forward(300)
+left(135)
+forward(300*sin(pi/4))
+left(90)
+forward(300*sin(pi/4))
+up()
+
+exitonclick()

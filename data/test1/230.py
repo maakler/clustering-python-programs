@@ -1,0 +1,28 @@
+from turtle import *
+
+#üritasin teha kaubalaeva
+forward(100)
+left(90)
+forward(110)
+right(135)
+forward(80)
+right(45)
+forward(100)
+right(45)
+forward(80)
+right(45)
+forward(500)
+right(45)
+forward(80)
+right(45)
+forward(100)
+right(45)
+forward(80)
+right(45)
+forward(50)
+right(90)
+forward(110)
+left(90)
+forward(400)
+
+exitonclick()

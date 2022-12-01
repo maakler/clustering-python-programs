@@ -1,0 +1,26 @@
+from turtle import *
+
+forward(100)
+right(120)
+forward(30)
+right(60)
+forward(70)
+right(60)
+forward(30)
+up()
+right(120)
+forward(40)
+left(90)
+down()
+forward(60)
+right(120)
+forward(30)
+right(120)
+forward(30)
+left(120)
+forward(50)
+right(150)
+forward(45)
+
+
+exitonclick()

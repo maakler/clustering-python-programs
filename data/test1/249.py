@@ -1,0 +1,17 @@
+from turtle import *
+
+forward(100)
+right(115)
+forward(100)
+right(65)
+forward(115)
+right(60)
+forward(100)
+right(118.5)
+forward(118)
+left(90)
+forward(70)
+right(90)
+forward(50)
+right(90)
+forward(70)

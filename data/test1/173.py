@@ -1,0 +1,55 @@
+from turtle import *
+import math
+
+forward(200)
+left(45)
+forward(math.sqrt(20000))
+left(135)
+forward(400)
+left(135)
+forward(math.sqrt(20000))
+
+left(135)
+up()
+forward(100)
+down()
+
+forward(50)
+right(90)
+forward (70)
+
+left(90)
+forward(100)
+right(90)
+forward(25)
+right(90)
+forward(25)
+right(90)
+forward(25)
+backward(25)
+left(90)
+forward (75)
+
+left(90)
+backward(25)
+forward(60)
+backward(25)
+
+left(90)
+forward(100)
+right(90)
+forward(25)
+right(90)
+forward(25)
+right(90)
+forward(25)
+backward(25)
+left(90)
+forward (75)
+
+left(90)
+forward(75)
+right(90)
+forward(50)
+
+exitonclick()

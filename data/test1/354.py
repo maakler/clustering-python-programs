@@ -1,0 +1,62 @@
+from turtle import *
+#Põhja tõusu kaatet
+a=int(sqrt(45*45/2))
+#kilpkonna positsioneering
+up()
+right(90)
+forward(100)
+left(90)
+down()
+#Põhi
+forward(125)
+left(45)
+forward(45)
+left(135)
+forward(250+2*a)
+left(135)
+forward(45)
+left(45)
+forward(125)
+up()
+left(90)
+forward(a)
+
+#Mast
+down()
+forward(300)
+backward(15)
+#vasak puri
+left(145)
+forward (275)
+left(125)
+forward(157)
+up()
+backward(157)
+right(125)
+backward(275)
+left(70)
+#parem puri
+down()
+forward(320)
+right(125)
+forward(184)
+up()
+backward(184)
+left(125)
+backward(320)
+right(35)
+backward(5)
+
+#lipp
+fillcolor("red")
+begin_fill()
+left(105)
+forward(20)
+left(165)
+forward(20)
+left(105)
+forward(5)
+end_fill()
+
+backward(100)
+exitonclick()
