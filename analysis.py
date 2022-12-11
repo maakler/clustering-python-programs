@@ -15,14 +15,16 @@ from sklearn.cluster import KMeans
 def read_python_files(data_path):
     """Reads `.py` files from the given folder `data_path`"""
     pyfiles = []
+    _true_filenames = []
     filenames = os.listdir(data_path)
     for filename in filenames:
         if filename[-3:] == ".py":
+            _true_filenames.append(filename)
             full = os.path.join(data_path, filename)
             if os.path.isfile(full):
                 with open(full, 'r') as f:
                     pyfiles.append(f.read())
-    return pyfiles
+    return pyfiles, _true_filenames
 
 def ast_to_tokens(pyfile_content: str, visitor=cyclomatic.Visitor()) -> list:
     """Returns tokens from the `visitor` after it visits `pyfile_content`. `visitor` defaults to `cyclomatic.Visitor()`"""

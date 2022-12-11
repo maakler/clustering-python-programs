@@ -6,7 +6,7 @@ import numpy as np
 from sklearn.metrics.pairwise import linear_kernel
 #from sklearn.cluster import DBSCAN
 
-data_contents = read_python_files("data/test2")
+data_contents, student_codes = read_python_files("data/test2")
 
 tokens = [ast_to_tokens(file) for file in data_contents]
 
