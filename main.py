@@ -1,7 +1,10 @@
 from analysis import *
+from vis import *
+
 import seaborn as sns
 import numpy as np
 from sklearn.metrics.pairwise import linear_kernel
+#from sklearn.cluster import DBSCAN
 
 data_contents = read_python_files("data/test2")
 
@@ -9,10 +12,18 @@ tokens = [ast_to_tokens(file) for file in data_contents]
 
 vectorizer = make_vectorizer(tokens)
 
-S = vectorizer.transform(tokens)
-print(vectorizer.vocabulary_) # Vocabulary built is inside vectorizer.vocabulary_
+vectors = vectorizer.transform(tokens)
+#print(vectorizer.vocabulary_) # Vocabulary built is inside vectorizer.vocabulary_
 
-tfm = linear_kernel(S, S)
+clusters = get_clusters(vectors, n_clusters=10)
+
+run_vis(vectors, clusters)
+
+# show the plot
+plt.show()
+plt.savefig("results/clusters2.png")
+
+tfm = linear_kernel(vectors, vectors)
 
 # TF-IDF Heatmap
 thm = sns.heatmap(tfm)

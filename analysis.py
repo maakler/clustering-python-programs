@@ -9,6 +9,7 @@ import visitors.allNodes as allnodes
 
 #from sklearn.metrics.pairwise import linear_kernel
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.cluster import KMeans
 
 
 def read_python_files(data_path):
@@ -52,3 +53,11 @@ def make_vectorizer(tokens: list):
     )
     vectorizer.fit(tokens)
     return vectorizer
+
+def get_clusters(vectors, clustering=KMeans, **kwargs):
+    """Get cluster labels."""
+    # create an instance of the clustering algorithm
+    model = clustering(**kwargs)
+
+    # predict the cluster assignments for each sentence
+    return model.fit_predict(vectors)

@@ -1,11 +1,13 @@
 import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+import numpy as np
 
-# create a scatter plot of the data, with different colors for each cluster
-plt.scatter(vectors[:, 0], vectors[:, 1], c=clusters)
+def run_vis(vectors, clusters):
+    """Create a scatter plot of the data, with different colors for each cluster"""
+    X = PCA(n_components=2).fit_transform(vectors.todense())
 
-# add labels to the axes of the plot
-plt.xlabel('x')
-plt.ylabel('y')
+    plt.scatter(X[:,0], X[:,1], c=clusters)
 
-# show the plot
-plt.show()
+    # add labels to the axes of the plot
+    plt.xlabel('x')
+    plt.ylabel('y')
