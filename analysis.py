@@ -25,10 +25,13 @@ def read_python_files(data_path):
 
 def ast_to_tokens(pyfile_content: str, visitor=cyclomatic.Visitor()) -> list:
     """Returns tokens from the `visitor` after it visits `pyfile_content`. `visitor` defaults to `cyclomatic.Visitor()`"""
-    root = ast.parse(pyfile_content)
-    visitor.visit(root)
-    names = [node.id for node in ast.walk(root) if isinstance(node, ast.Name)]
-    return visitor.tokens + names
+    try:
+        root = ast.parse(pyfile_content)
+        visitor.visit(root)
+        names = [node.id for node in ast.walk(root) if isinstance(node, ast.Name)]
+        return visitor.tokens + names
+    except Exception:
+        return ["ERROR"]
 
 def make_vectorizer(tokens: list):
     """Trains and returns the vectorizer. `tokens` should be a list of collections of tokens, e.g. `[['token1', 'token2'], ['token1']]`"""
