@@ -4,7 +4,7 @@ import numpy as np
 
 def run_vis(vectors, clusters):
     """Create a scatter plot of the data, with different colors for each cluster"""
-    X = PCA(n_components=2).fit_transform(vectors.todense())
+    X = PCA(n_components=2).fit_transform(np.asarray(vectors.todense()))
 
     plt.scatter(X[:,0], X[:,1], c=clusters)
 
