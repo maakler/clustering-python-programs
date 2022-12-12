@@ -33,7 +33,7 @@ def ast_to_tokens(pyfile_content: str, visitor=unplag.Visitor()) -> list:
         root = ast.parse(pyfile_content)
         visitor.visit(root)
         names = [node.id for node in ast.walk(root) if isinstance(node, ast.Name)]
-        return visitor.tokens + names
+        return names
     except Exception:
         return ["ERROR"]
 
@@ -79,3 +79,22 @@ def get_similarities(vectors, student_codes):
     most_similar.reverse()
     least_similar = sorted(max_values, key=lambda x: x[0])
     return most_similar, least_similar
+
+
+def get_similarity_count_matrix(n):
+    # Create an empty dictionary
+    my_dict = {}
+    # Create a tuple with the integer 0 as the first element and the float 0 as the second element
+    tup = (0, 0.0)
+
+    # Iterate over the numbers from 1 to 377
+    for i in range(1, n + 1):
+        # Convert each number to a string and add it as a key in the dictionary with an empty list as the value
+        string = "S" + "0" * (3 - len(str(i))) + str(i)
+        my_dict[string] = []
+        # Add the tuple to the list of the corresponding key
+        for j in range(1, n + 1):
+            my_dict[string].append(list(tup))
+
+    # Return the dictionary
+    return my_dict

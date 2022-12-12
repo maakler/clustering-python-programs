@@ -5,35 +5,68 @@ import seaborn as sns
 import numpy as np
 from sklearn.metrics.pairwise import linear_kernel
 
+scm = get_similarity_count_matrix(377)
 
-data_contents, student_codes = read_python_files("data/test1")
+for K in range(1, 16):
+    for k in range(1, 5):
+        num = "0" * (2 - len(str(K))) + str(K)
+        dir_name = "data/K" + num + "kodu" + str(k)
 
-tokens = [ast_to_tokens(file) for file in data_contents]
+        if not os.path.isdir(dir_name):
+            continue
 
-vectorizer = make_vectorizer(tokens)
+        print(dir_name)
 
-# print(vectorizer.vocabulary_)  # Vocabulary built is inside vectorizer.vocabulary_
-vectors = vectorizer.transform(tokens)
+        data_contents, student_codes = read_python_files(dir_name)
 
-clusters = get_clusters(vectors, n_clusters=10)
+        tokens = [ast_to_tokens(file) for file in data_contents]
 
-run_vis(vectors, clusters)
+        vectorizer = make_vectorizer(tokens)
 
-# show the plot
-plt.show()
-plt.savefig("results/clusters2.png")
+        # print(vectorizer.vocabulary_)  # Vocabulary built is inside vectorizer.vocabulary_
+        vectors = vectorizer.transform(tokens)
 
-tfm = linear_kernel(vectors, vectors)
+        clusters = get_clusters(vectors, n_clusters=2)
 
-# TF-IDF Heatmap
-thm = sns.heatmap(tfm)
-fig = thm.get_figure()
-fig.savefig("results/tfidf_heatmap2.png", dpi=150)
+        run_vis(vectors, clusters)
 
-np.savetxt("results/tfidf", tfm, fmt="%.4f", delimiter=',')
+        # show the plot
+        plt.show()
+        # plt.savefig("results/clusters_K" + num + "kodu" + str(k) + ".png")
 
-most_similar, least_similar = get_similarities(tfm, student_codes)
+        tfm = linear_kernel(vectors, vectors)
 
+        # TF-IDF Heatmap
+        thm = sns.heatmap(tfm)
+        fig = thm.get_figure()
+        fig.savefig("results/varnames_K" + num + "kodu" + str(k) + ".png", dpi=150)
+
+        np.savetxt("results/varnames_K" + num + "kodu" + str(k), tfm, fmt="%.4f", delimiter=',')
+
+        for i, row in enumerate(tfm):
+            s1 = student_codes[i][:-3]
+            for j, student2 in enumerate(row):
+                s2 = int(student_codes[j][1:-3]) - 1
+                scm[s1][s2][0] += 1
+                scm[s1][s2][1] += student2
+
+S = []
+student_codes = []
+for key, value in scm.items():
+    temp = []
+    student_codes.append(key)
+    for tup in value:
+        if tup[0] == 0:
+            temp.append(0)
+        else:
+            temp.append(tup[1] / tup[0])
+    S.append(temp)
+
+student_codes = ["S" + "0" * (3 - len(str(i))) + str(i) for i in range(1, 377 + 1)]
+
+most_similar, least_similar = get_similarities(S, student_codes)
+
+print("EPIC FINALLLY")
 print("Most similar:")
 for i in most_similar[:20]:
     print(i[0], "- ", i[1], i[2])
