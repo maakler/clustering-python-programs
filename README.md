@@ -16,3 +16,4 @@ Our approach can be described as the following:
 3. Feed the sequences of tokens to a vectoriser.
 4. Perform clusterisation on the resulting vectors.
 We also use PCA for dimensionality reduction when plotting.
+The tf-idf vectorizer approach was inspired by https://github.com/scriptographers/UnPlag/blob/master/models/python/tfidf.py
